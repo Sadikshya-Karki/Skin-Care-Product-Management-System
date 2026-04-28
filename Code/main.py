@@ -100,4 +100,62 @@ def sell_products(products):
         }
         write.generate_invoice(invoice_data, invoice_type="sale")
 
+def restock_products(products):
+    """
+    Handles restocking of products.
+    """
+    display_products(products)
+    vendor_name = input("Enter vendor name: ")
+    product_name = input("Enter product name: ").strip()
 
+    # Validate product name
+    product_to_restock = find_product(products, product_name)
+    if not product_to_restock:
+        print("Product not found.")
+        return
+
+    quantity = input(f"Enter quantity to restock for {product_name}: ")
+    try:
+        quantity = int(quantity)
+        if quantity <= 0:
+            print("Quantity must be a positive integer.")
+            return
+    except ValueError:
+        print("Invalid quantity. Please enter a number.")
+        return
+
+    cost_price = input(f"Enter new cost price for {product_name}: ")
+    try:
+        cost_price = float(cost_price)
+        if cost_price <= 0:
+            print("Cost price must be a positive number.")
+            return
+    except ValueError:
+        print("Invalid cost price. Please enter a number.")
+        return
+
+    # Update product information
+    product_to_restock['quantity'] += quantity
+    product_to_restock['cost_price'] = cost_price
+
+    # Generate invoice data
+    now = datetime.datetime.now()
+    total_amount = quantity * cost_price
+
+    # Prepare invoice details
+    invoice_data = {
+        "vendor_name": vendor_name,
+        "date": f"{now.year}-{now.month:02d}-{now.day:02d} {now.hour:02d}:{now.minute:02d}:{now.second:02d}",
+        "product_name": product_name,
+        "quantity_restocked": quantity,
+        "cost_price": cost_price,
+        "total_amount": total_amount
+    }
+
+    # Generate invoice
+    write.generate_invoice(invoice_data, invoice_type="restock")
+
+    # Save updated product list to products.txt
+    write_products_to_file("products.txt", products)
+
+    
