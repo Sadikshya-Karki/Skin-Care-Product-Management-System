@@ -158,4 +158,58 @@ def restock_products(products):
     # Save updated product list to products.txt
     write_products_to_file("products.txt", products)
 
-    
+def find_product(products, product_name):
+    """
+    Finds a product in the list of products by name.
+    """
+    for product in products:
+        if product['name'].lower() == product_name.lower():
+            return product
+    return None
+
+def write_products_to_file(filename, products):
+    """
+    Writes the product data back to the file.
+    """
+    try:
+        with open(filename, 'w') as file:
+            for product in products:
+                line = f"{product['name']},{product['brand']},{product['quantity']},{product['cost_price']},{product['country']}\n"
+                file.write(line)
+        print("Product data updated in products.txt")
+    except Exception as e:
+        print(f"Error writing to file: {e}")
+
+def main():
+    """
+    Main function to run the skin care product sale system.
+    """
+    products = read.read_products_from_file()
+    if not products:
+        print("Could not load products.")
+        return
+
+    while True:
+        print("\nOptions:")
+        print("1. Display Products")
+        print("2. Sell Products")
+        print("3. Restock Products")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ").strip()
+
+        if choice == '1':
+            display_products(products)
+        elif choice == '2':
+            sell_products(products)
+        elif choice == '3':
+            restock_products(products)
+        elif choice == '4':
+            print("Goodbye")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
