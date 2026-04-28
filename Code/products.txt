@@ -1,0 +1,12 @@
+Vitamin C Serum,Garnier,200,1000.0,France
+Skin Cleanser,Cetaphil,100,280.0,Switzerland
+Sunscreen,Aqualogica,200,700.0,India
+Foaming Cleanser,CeraVe,150,1500.0,USA
+Skin Cream,Himalaya,100,500.0,India
+Day Cream,Olay,145,1000.0,USA
+Soft Cream,Nivea,205,1400.0,Germany
+Fairness Serum,Garnier,250,1200.0,France
+Foaming Face Wash,Clean and Clear,100,600.0,USA
+Aloe Vera Gel,Herbline Naturals,100,400.0,Nepal
+Facial Wash,Biore,150,900.0,Japan
+Cleansing Oil,The Face Shop,150,1600.0,South Korea
